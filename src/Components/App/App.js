@@ -1,9 +1,21 @@
+// Dependencies
 import React, { Component } from 'react';
-import './App.css';
-import Header from '../Header/Header'
 import axios from 'axios';
+import { BrowserRouter as BR, Link, Route } from 'react-router-dom';
+
+// Components
+import Header from '../Header/Header';
 import PlanetList from '../PlanetList/PlanetList';
 import People from '../People/People';
+
+// Pages
+import Home from '../../Pages/Home/Home';
+import Planets from '../../Pages/Planets/Planets';
+import Peoples from '../../Pages/Peoples/Peoples';
+
+// CSS
+import './App.css';
+
 
 class App extends Component {
 
@@ -51,13 +63,28 @@ class App extends Component {
 
   render() { 
     return (
-      <div className="App">
-        <Header />
-        <h1>Planets</h1>
-        <PlanetList planets={this.state.planets}/>
-        <h1>People</h1>
-        <People people={this.state.people} />
-      </div>
+      <BR>
+        <div className="App">
+          <Header />
+          <nav>
+            <ul>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to={{pathname: '/planets', state: {planets: [...this.state.planets]}}}>Planets</Link></li>
+              <li><Link to={{pathname: '/people', state: {people: [...this.state.people]}}}>People</Link></li>
+            </ul>
+          </nav>
+          {/*<h1>Planets</h1>
+          <PlanetList planets={this.state.planets}/>
+          <h1>People</h1>
+          <People people={this.state.people} /> */}
+          <main>
+            <Route exact path='/' component={Home}/>
+            <Route path='/planets' component={Planets}/>
+            <Route path='/people' component={Peoples}/>
+            {/* <PlanetList array={this.state.people}/> */}
+          </main>
+        </div>
+      </BR>
     );
   }
 }

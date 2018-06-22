@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import qs from 'query-string';
 class List extends Component{
 
    render(){
